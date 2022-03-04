@@ -8,12 +8,11 @@ exports.getStates = (req, res) => {
 			const states = snapshot.docs.map(doc => {
 				let state = doc.data()
 				state.id = doc.id
-				state.pathId = state.name.replace(/\s/g, '_')
 				state.colors = {
 					inactive: '#d1be9d',
 					active: '#ffeecb',
-					correct: '#82a775',
-					incorrect: '#b05f66',
+					correct: '#357e61',
+					incorrect: '#c1564b',
 				}
 				return state
 			})
