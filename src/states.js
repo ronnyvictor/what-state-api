@@ -9,10 +9,9 @@ exports.getStates = (req, res) => {
 				let state = doc.data()
 				state.id = doc.id
 				state.colors = {
-					inactive: '#d1be9d',
 					active: '#ffeecb',
-					correct: '#357e61',
-					incorrect: '#c1564b',
+					correct:  '#1b5299',
+					incorrect: '#b81118',
 				}
 				return state
 			})
