@@ -7,6 +7,7 @@ exports.postScore = (req, res) => {
 		score: req.body.score,
 		userId: req.body.userId,
 		states: req.body.states,
+		deleted: false,
 		date: new Date().toLocaleDateString('en-us', {
 			month: '2-digit',
 			day: '2-digit',
@@ -29,22 +30,25 @@ exports.getScoresByUser = (req, res) => {
 	const { userId } = req.params
 	db.collection('scores')
 		.where('userId', '==', userId)
+		.where('deleted', '==', false)
 		.get()
 		.then(snapshot => {
 			const scores = snapshot.docs.map(doc => {
 				let score = doc.data()
 				score.id = doc.id
-        return score;
+				return score
 			})
-      res.send(scores)
+			res.send(scores)
 		})
 		.catch(console.error)
 }
 
 exports.deleteScoreById = (req, res) => {
-  const db = connectDb()
-  const {scoreId} = req.params
-  db.collection('scores').doc(scoreId).delete()
-  .then(res.send('success!'))
-  .catch(console.error)
+	const db = connectDb()
+	const { scoreId } = req.params
+	db.collection('scores')
+		.doc(scoreId)
+		.update({ deleted: true })
+		.then(res.send('success!'))
+		.catch(console.error)
 }

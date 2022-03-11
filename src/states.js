@@ -10,7 +10,7 @@ exports.getStates = (req, res) => {
 				state.id = doc.id
 				state.colors = {
 					active: '#ffeecb',
-					correct:  '#1b5299',
+					correct: '#1b5299',
 					incorrect: '#b81118',
 				}
 				return state
@@ -18,24 +18,4 @@ exports.getStates = (req, res) => {
 			res.status(200).send(states)
 		})
 		.catch(err => res.status(500).send(err))
-}
-
-exports.getStateById = (req, res) => {
-	const db = connectDb()
-	const { stateId } = req.params
-	db.collection('states')
-		.doc(stateId)
-		.get()
-		.then(doc => {
-			let state = doc.data()
-			state.id = doc.id
-			res.status(200).send(state)
-		})
-		.catch(err => res.status(500).send(err))
-}
-
-exports.newState = (req, res) => {
-	const db = connectDb()
-	const state = req.body
-	db.collection('states').add(state).then(res.send(state)).catch(console.error)
 }
