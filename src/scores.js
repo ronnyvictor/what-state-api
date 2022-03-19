@@ -1,4 +1,5 @@
 const { connectDb } = require('./connectDb')
+const { FieldValue } = require('firebase-admin/firestore')
 
 exports.postScore = (req, res) => {
 	const db = connectDb()
@@ -8,20 +9,12 @@ exports.postScore = (req, res) => {
 		userId: req.body.userId,
 		states: req.body.states,
 		deleted: false,
-		date: new Date().toLocaleDateString('en-us', {
-			month: '2-digit',
-			day: '2-digit',
-			year: 'numeric',
-		}),
-		time: new Date().toLocaleTimeString('en-us', {
-			hour: '2-digit',
-			minute: '2-digit',
-		}),
+		timestamp: FieldValue.serverTimestamp(),
 	}
 
 	db.collection('scores')
 		.add(newScore)
-		.then(res.send('success'))
+		.then(res.send(newScore))
 		.catch(console.error)
 }
 

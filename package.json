@@ -1,7 +1,27 @@
 {
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "firebase-admin": "^10.0.2"
-  }
+  },
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronnyvictor/what-state-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ronnyvictor/what-state-api/issues"
+  },
+  "homepage": "https://github.com/ronnyvictor/what-state-api#readme",
+  "description": ""
 }
